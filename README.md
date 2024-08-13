@@ -35,7 +35,15 @@ __Runnable interface in Main method :__
 
 In the WeatherGUI, go and add some gui components
 * JTextField will add a text box in the window
-* customise the ui with the help of boundations, font and fixes
+* customise the ui with the help of bound, font and fixes
+
+
+**For adding a imageIcon button ->**  We can create a loadImage method with ImageIcon class.
+
+* BufferImage class will helps to manipulate the image content;
+* create the "image", object with BufferImage class, and assign it to the value of source image destination
+* ImagIO class will helps to read and write to an image, .read() method will read the image from the source
+* create the object of file class with new operator, and give the string value object assign to file object
 
 
 

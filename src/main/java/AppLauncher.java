@@ -14,9 +14,8 @@ public class AppLauncher {
                  new WeatherAppGUI().setVisible(true);
             }
         } ); // this whole block of code, implements our gui to work on Event Dispatch Thread
-        // it is important for maintaining  the responsiveness and stability of a swing application's UI.
+        // it is important for maintaining  the responsiveness and stability of a swing application's UI
 
-
-
+        
     }
 }
