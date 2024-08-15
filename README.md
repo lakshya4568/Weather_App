@@ -3,7 +3,7 @@
 *Add the Json-Jar file (source from net) to project structure
 to the lib directory*
 
-* Add the assests directory to src (contains img/assest)
+* Add the assets directory to src (contains img/assest)
 * in the main dir, create the java class WeatherGUIApp
 
 > **_NOTE:_**  Super() method is used to call the constructor of the parent class
@@ -38,15 +38,18 @@ In the WeatherGUI, go and add some gui components
 * customise the ui with the help of bound, font and fixes
 
 
-**For adding a imageIcon button ->**  We can create a loadImage method with ImageIcon class.
+**For adding a imageIcon button ->**  We can create a loadImage method of ImageIcon class.
 
-* BufferImage class will helps to manipulate the image content;
+* BufferImage class will help to manipulate the image content;
 * create the "image", object with BufferImage class, and assign it to the value of source image destination
-* ImagIO class will helps to read and write to an image, .read() method will read the image from the source
+* ImagIO class will help to read and write to an image, .read() method will read the image from the source
 * create the object of file class with new operator, and give the string value object assign to file object
+* Return the image object of ImageIcon return type
 
+### Weather Description Method
 
+> **`SwingConstants`** - It's an interface that is a collection of constants which generally uses for positioning and orientation of swing components.
 
-
-
-
+* Set bounds, fonts and alignment for this component.
+* Font method -> **new** Font(name, style(font), size)-> Font class
+* add the component

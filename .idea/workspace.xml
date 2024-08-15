@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="created the gui window, added the text box from Jtext">
+      <change afterPath="$PROJECT_DIR$/src/main/java/WeatherAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
@@ -37,12 +38,12 @@
     &quot;assignee&quot;: &quot;lakshya4568&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/lakshya4568/Weather_App.git",
-    "accountId": "766090fc-79af-48b0-98b6-b80351952e1d"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lakshya4568/Weather_App.git&quot;,
+    &quot;accountId&quot;: &quot;766090fc-79af-48b0-98b6-b80351952e1d&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
@@ -71,7 +72,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.13652869",
     "project.structure.side.proportion": "0.31367522",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,7 +94,10 @@
       <updated>1723349502746</updated>
       <workItem from="1723349503803" duration="16124000" />
       <workItem from="1723373749704" duration="3160000" />
-      <workItem from="1723450995014" duration="6637000" />
+      <workItem from="1723450995014" duration="6924000" />
+      <workItem from="1723511260989" duration="323000" />
+      <workItem from="1723511594530" duration="3970000" />
+      <workItem from="1723530746962" duration="14726000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -142,9 +146,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <MESSAGE value="created the gui window, added the text box from Jtext" />
     <MESSAGE value="ignored the workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="ignored the workspace.xml" />
+    <MESSAGE value="added, the button icon, documented the README.md" />
+    <MESSAGE value="created the gui window, added the text box from Jtext" />
+    <option name="LAST_COMMIT_MESSAGE" value="created the gui window, added the text box from Jtext" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
