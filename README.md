@@ -53,3 +53,9 @@ In the WeatherGUI, go and add some gui components
 * Set bounds, fonts and alignment for this component.
 * Font method -> **new** Font(name, style(font), size)-> Font class
 * add the component
+
+#### Add More GUI Components 
+
+Add Components such as Humidity identifier and Wind-speed using JLabel class of swing library and set their font and bounds.
+
+## 

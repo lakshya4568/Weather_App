@@ -1,3 +1,5 @@
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -74,7 +76,6 @@ public class WeatherAppGUI extends  JFrame {
         JLabel humidityImage = new JLabel(loadImage("src/assets/humidity.png"));
         humidityImage.setBounds(15, 500, 74, 66);
         add(humidityImage);
-
         //humidityText
         JLabel humidityText = new JLabel(
                "<html><b>Humidity</b> 100%</html>"
@@ -83,9 +84,20 @@ public class WeatherAppGUI extends  JFrame {
         humidityText.setFont(new Font("Calibre", Font.BOLD, 16));
         add(humidityText);
 
+        // Windspeed image
+        JLabel windspeedImage = new JLabel(loadImage("src/assets/windspeed.png"));
+        windspeedImage.setBounds(220, 500, 74, 66);
+        add(windspeedImage);
+        // Windspeed Text
+        JLabel windspeedText = new JLabel(
+         "<html><b>Windspeed</b> 15km/h</html>"
+        );
+        windspeedText.setBounds(310, 500, 85, 55);
+        windspeedText.setFont(new Font("Calibre", Font.BOLD, 15));
+        add(windspeedText);
     }
 
-    public ImageIcon loadImage(String resourcePath) {
+    private ImageIcon loadImage(String resourcePath) {
         //  create the Icon for icon
         try {
             BufferedImage image = ImageIO.read(new File(resourcePath));
@@ -96,5 +108,13 @@ public class WeatherAppGUI extends  JFrame {
 
         System.out.println("Could not find the resource");
         return null;
+    }
+
+    private void darkTheme() {
+        try {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
