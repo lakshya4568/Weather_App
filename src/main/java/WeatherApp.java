@@ -15,9 +15,19 @@ and display to user
  */
 public class WeatherApp {
     // fetch weather for the given location data
-    public static JSObject getWeather(String location) {
+    public static JSObject getWeatherData(String locationName) {
         // get location coordinate using the geolocation API
-        JSONArray locationData = getLocationData(location);
+        JSONArray locationData = getLocationData(locationName);
+
+        //extract  latitude and longitude from the location data
+        assert locationData != null;
+        JSONObject location = (JSONObject) locationData.get(0);
+        double latitude = (double) location.get("latitude");
+        double longitude = (double) location.get("longitude");
+
+        // build API request URL  with location coordinates
+
+
         return null;
     }
 
@@ -41,13 +51,13 @@ public class WeatherApp {
      */
 
     // retrieves geographic coordinates for given location name
-    public static JSONArray getLocationData(String location) {
+    public static JSONArray getLocationData(String locationName) {
         // replace any whitespace in location name to + adhere to APIs request format
         // so when giving city name = "new york", it standards to new+york;
-        location = location.replaceAll(" ", "+");
+        locationName = locationName.replaceAll(" ", "+");
 
         // build API url with location parameter
-        String URLString = "https://api.api-ninjas.com/v1/geocoding?city=" + location;
+        String URLString = "https://api.api-ninjas.com/v1/geocoding?city=" + locationName;
 
         try {
             // call the api and get the response

@@ -3,7 +3,7 @@
 *Add the Json-Jar file (source from net) to project structure
 to the lib directory*
 
-* Add the assets directory to src (contains img/assest)
+* Add the assets directory to src (contains img/asset)
 * in the main dir, create the java class WeatherGUIApp
 
 > **_NOTE:_**  Super() method is used to call the constructor of the parent class
@@ -12,8 +12,8 @@ Jframe constructor can take parameter as String, for title.
 Also, GraphicConfiguration class, and both.
 
 * setDefaultCloseOperation() -> to end the process
- 
-EXIT_ON_CLOSE -> java.swing constant to exit the application. (taken as parameter)
+
+EXIT_ON_CLOSE -> java. Swing constant to exit the application. (taken as parameter)
 
 **setLocationRelativeTo()** -> Sets the
 location of the window relative to the specified component ... Null can be used to place the window at center of screen.
@@ -89,4 +89,12 @@ getLocationData method is necessary;
 _JavaScript Format for different data Structure_
 
 > Array, objects and json = [], {}, "{}";
-> 
+
+The geolocation api will return us a list of different countries that have entered city,
+so we are going to use the first's object data, hence we use get(0) in `location object` of JSONObject class in
+getLocationData method.
+
+<p> we can also see, that we can retrieve the values using the get ("json property"), we also have to cast type whenever we get a value from JSONObject</p>
+
+> The get(key) method of JSONObject class will return the value to which the key is specified, and we can cast it to the
+> required type.
