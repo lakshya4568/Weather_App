@@ -30,6 +30,7 @@ public class WeatherAppGUI extends  JFrame {
 
         // adding gui components
         guiComponents();
+        //  darkTheme();
     }
 
     private void guiComponents() {
@@ -95,6 +96,8 @@ public class WeatherAppGUI extends  JFrame {
         windspeedText.setBounds(310, 500, 85, 55);
         windspeedText.setFont(new Font("Calibre", Font.BOLD, 15));
         add(windspeedText);
+
+
     }
 
     private ImageIcon loadImage(String resourcePath) {

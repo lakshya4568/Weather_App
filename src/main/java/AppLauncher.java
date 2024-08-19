@@ -16,5 +16,6 @@ public class AppLauncher {
         } ); // this whole block of code, implements our gui to work on Event Dispatch Thread
         // it is important for maintaining  the responsiveness and stability of a swing application's UI
 
+        System.out.println(WeatherApp.getLocationData("Tokyo"));
     }
 }

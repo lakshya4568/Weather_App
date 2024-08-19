@@ -58,4 +58,35 @@ In the WeatherGUI, go and add some gui components
 
 Add Components such as Humidity identifier and Wind-speed using JLabel class of swing library and set their font and bounds.
 
-## 
+## Weather API
+
+### JSON
+
+Import the JSON jar file to the project structure, which contains the org.json package, it has classes as JSONArray and
+JSONObject.
+which will help to parse the JSON data. We can store the JSON data as array through JSONArray class and as object
+through JSONObject class.
+
+To use weather forecast api we need to give the longitude and latitude data which can be found using their Geolocation
+API,
+that's why we will be creating another API call where it will take in and entered location, and returns the latitude and
+longitude data
+
+#### HTTPS Status Code
+
+<h6> Level 200 </h6>
+<ol>
+<li>200 : OK</li>
+<li>201 : Created</li>
+<li>202: Accepted</li>
+<li>203: Non-Authoritative Information</li>
+<li>204: No Content</li>
+</ol>
+
+about the string Builder, scanner hasNext method, and explaining in detail about the
+getLocationData method is necessary;
+
+_JavaScript Format for different data Structure_
+
+> Array, objects and json = [], {}, "{}";
+> 
