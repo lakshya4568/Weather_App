@@ -98,3 +98,5 @@ getLocationData method.
 
 > The get(key) method of JSONObject class will return the value to which the key is specified, and we can cast it to the
 > required type.
+
+

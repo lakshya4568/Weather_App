@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="made can api callback function that will connect to geocoding api and return the longi and latitudinal data from the sever using https client server class of java">
+    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="added the procedural changes that is required to get the location data form longitude and latitude and return it as double in WeatherApp.java,&#10;&#10;also added the further documentation in README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +118,9 @@
       <workItem from="1723711451086" duration="60000" />
       <workItem from="1723713696692" duration="17955000" />
       <workItem from="1723880224483" duration="14117000" />
-      <workItem from="1723905519659" duration="7491000" />
+      <workItem from="1723905519659" duration="10592000" />
+      <workItem from="1724048995183" duration="8562000" />
+      <workItem from="1724212738449" duration="930000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -143,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724040652751</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added the procedural changes that is required to get the location data form longitude and latitude and return it as double in WeatherApp.java,&#10;&#10;also added the further documentation in README.md">
+      <option name="closed" value="true" />
+      <created>1724044656977</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724044656977</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,8 +188,10 @@
     <MESSAGE value="ignored the workspace.xml" />
     <MESSAGE value="added, the button icon, documented the README.md" />
     <MESSAGE value="created the gui window, added the text box from Jtext" />
+    <MESSAGE value="made can api callback function that will connect to geocoding api and return the longi and latitudinal data from the sever using https client server class of java&#10;&#10;Signed-off-by: Lakshya Sharma &lt;lakshya4568@gmail.com&gt;" />
     <MESSAGE value="made can api callback function that will connect to geocoding api and return the longi and latitudinal data from the sever using https client server class of java" />
-    <option name="LAST_COMMIT_MESSAGE" value="made can api callback function that will connect to geocoding api and return the longi and latitudinal data from the sever using https client server class of java" />
+    <MESSAGE value="added the procedural changes that is required to get the location data form longitude and latitude and return it as double in WeatherApp.java,&#10;&#10;also added the further documentation in README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the procedural changes that is required to get the location data form longitude and latitude and return it as double in WeatherApp.java,&#10;&#10;also added the further documentation in README.md" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
