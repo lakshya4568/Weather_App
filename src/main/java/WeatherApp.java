@@ -1,4 +1,5 @@
 import netscape.javascript.JSObject;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
@@ -20,13 +21,7 @@ public class WeatherApp {
         JSONArray locationData = getLocationData(locationName);
 
         //extract  latitude and longitude from the location data
-        assert locationData != null;
-        JSONObject location = (JSONObject) locationData.get(0);
-        double latitude = (double) location.get("latitude");
-        double longitude = (double) location.get("longitude");
-
-        // build API request URL  with location coordinates
-        String apiURL = "https://api.api-ninjas.com/v1/weather?lat=" + latitude + "&lon=" + longitude;
+        final String apiURL = getString(locationData);
 
         try {
             // call the api and get the response
@@ -54,16 +49,30 @@ public class WeatherApp {
 
                 if (hourlydata != null && !hourlydata.isEmpty()) {
                     return (JSObject) hourlydata.get(0);
-                 } else {
-                 // handle the case where the array is empty or null
+                } else {
+                    // handle the case where the array is empty or null
                     return null;
-            }
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static @NotNull String getString(JSONArray locationData) {
+        assert locationData != null;
+        JSONObject location = (JSONObject) locationData.get(0);
+        double latitude = (double) location.get("latitude");
+        double longitude = (double) location.get("longitude");
+
+        // build API request URL  with location coordinates
+        String apiURL = "https://api.open-meteo.com/v1/forecast?" +
+                "latitude=" + latitude +
+                "&longitude=" + longitude +
+                "&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FSingapore ";
+        return apiURL;
     }
 
     @org.jetbrains.annotations.Nullable
@@ -78,16 +87,16 @@ public class WeatherApp {
         return null;
     }
 
-  private static String weather_api() {
+    private static String weather_api() {
         Properties config = new Properties();
-        try(FileInputStream input = new FileInputStream("src/config.properties")) {
+        try (FileInputStream input = new FileInputStream("src/config.properties")) {
             config.load(input);
             return config.getProperty("weather_api");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-  }
+    }
 
     /* to use weather forecast api we need to give
     the longitude and latitude data which can be found
@@ -158,7 +167,7 @@ public class WeatherApp {
             // methods : GET, PUT, DELETE, POST
             connection.setRequestMethod("GET");
             connection.setRequestProperty("X-API-Key", api_key());
-            connection.addRequestProperty("ACCEPT" , "application/json");
+            connection.addRequestProperty("ACCEPT", "application/json");
             //connect to our API
             connection.connect();
             return connection;
