@@ -2,10 +2,11 @@ import netscape.javascript.JSObject;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
-
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -37,15 +38,27 @@ public class WeatherApp {
                 Scanner sc = new Scanner(connection.getInputStream());
 
                 while (sc.hasNext()) {
+                    // read and store the resulting json data into our string builder
                     hourly.append(sc.nextLine());
                 }
                 sc.close();
+                // close the url connection
                 connection.disconnect();
                 JSONParser parser = new JSONParser();
-                JSONObject resultHour = (JSONObject) parser.parse(hourly.toString());
+                JSONObject resultHour = (JSONObject) parser.parse(String.valueOf(hourly));
 
                 // extract the hourly data from the JSON response
-                JSONArray hourlydata = (JSONArray) resultHour.get("Hour");
+                JSONObject hourlydata = (JSONObject) resultHour.get("hourly");
+
+                // we want to get the current' hours' data
+                // we need to get the index of our current data
+
+                JSONArray time = (JSONArray) hourlydata.get("time");
+                int index = findIndexOfCurrentTime(time);
+
+                JSONArray temperatureData = (JSONArray) hourlydata.get("temperature_2m");
+                // now we just need to get the temperature data of the current hour,
+                // and we pass  in the index of the current hour
 
                 if (hourlydata != null && !hourlydata.isEmpty()) {
                     return (JSObject) hourlydata.get(0);
@@ -54,7 +67,6 @@ public class WeatherApp {
                     return null;
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,6 +108,30 @@ public class WeatherApp {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    private static int findIndexOfCurrentTime(JSONArray timeList) {
+        String currentTime = getCurrentTime();
+
+        for (int i = 0; i < timeList.size(); i++) {
+            String time = (String) timeList.get(i);
+            if (time.equalsIgnoreCase(currentTime)) {
+                // returns the index
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    public static String getCurrentTime() {
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        //format date to be 2023-09-23T10:15:30  (this is how the api read time)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
+        // format and print the current date and time
+        return currentTime.format(formatter);
     }
 
     /* to use weather forecast api we need to give
