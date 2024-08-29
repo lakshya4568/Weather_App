@@ -30,6 +30,7 @@ public class WeatherApp {
 
             // check for response status
             // 200 means connection successful
+            assert connection != null;
             if (connection.getResponseCode() != 200) {
                 System.out.println("COULD NOT CONNECT to api");
                 return null;
@@ -132,6 +133,27 @@ public class WeatherApp {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
         // format and print the current date and time
         return currentTime.format(formatter);
+    }
+
+    // get the weather code from the internet and identify the weather condition
+    //  based on WMO weather code interpretation
+    private static String convertWeatherCode(long WeatherCode) {
+        String weatherCondidition = "";
+        if (WeatherCode == 0L) { // weatherCode -> 0
+            //clear weather
+            weatherCondidition = "Clear";
+        } else if (WeatherCode > 0L && WeatherCode <= 3L) { // weatherCode -> 1 to 3
+            //cloudy
+            weatherCondidition = "Cloudy";
+        } else if (WeatherCode >= 51L && WeatherCode <= 67L) ||(WeatherCode >= 80L && WeatherCode <= 90L) {
+            // rain
+            weatherCondidition = "Rain";
+        } else(WeatherCode >= 71L && WeatherCode <= 77L) {
+            // snow
+            weatherCondidition = "Snow";
+        }
+
+        return weatherCondidition;
     }
 
     /* to use weather forecast api we need to give
