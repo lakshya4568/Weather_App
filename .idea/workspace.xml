@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="lol, I FKING ADDED THE INDEX OF THE CURRENET DATA AND EXTRAACT THE DATA FROM THE ARRAHY HEll, yeah...">
+    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="added the WeatherCode method that explain the weather code and return the weather condition based on it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/WeatherAppGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherAppGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +120,7 @@
       <workItem from="1723880224483" duration="14117000" />
       <workItem from="1723905519659" duration="10592000" />
       <workItem from="1724048995183" duration="8562000" />
-      <workItem from="1724212738449" duration="31396000" />
+      <workItem from="1724212738449" duration="39054000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -168,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724750114867</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added the WeatherCode method that explain the weather code and return the weather condition based on it">
+      <option name="closed" value="true" />
+      <created>1724924422394</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724924422394</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,8 +217,19 @@
     <MESSAGE value="added the procedural changes that is required to get the location data form longitude and latitude and return it as double in WeatherApp.java,&#10;&#10;also added the further documentation in README.md" />
     <MESSAGE value="finally, got the hourly data from the open meteo api call, and extract the fucntion from to getString from the apiUrl, and annotate, which can be the case of new code format" />
     <MESSAGE value="lol, I FKING ADDED THE INDEX OF THE CURRENET DATA AND EXTRAACT THE DATA FROM THE ARRAHY HEll, yeah..." />
-    <option name="LAST_COMMIT_MESSAGE" value="lol, I FKING ADDED THE INDEX OF THE CURRENET DATA AND EXTRAACT THE DATA FROM THE ARRAHY HEll, yeah..." />
+    <MESSAGE value="added the WeatherCode method that explain the weather code and return the weather condition based on it" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the WeatherCode method that explain the weather code and return the weather condition based on it" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

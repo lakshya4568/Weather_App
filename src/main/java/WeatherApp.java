@@ -1,8 +1,11 @@
-import netscape.javascript.JSObject;
+// WeatherApp.java
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -10,83 +13,89 @@ import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.Scanner;
 
-/*
-Retrieving the weather data from API - this backend logic will
-fetch the latest weather data from the external API and return it to the GUI
-and display to user
- */
 public class WeatherApp {
-    // fetch weather for the given location data
-    public static JSObject getWeatherData(String locationName) {
-        // get location coordinate using the geolocation API
-        JSONArray locationData = getLocationData(locationName);
+    public static JSONObject getWeatherData(String locationName) {
 
-        //extract  latitude and longitude from the location data
-        final String apiURL = getString(locationData);
+        // get location coordinates using the geolocation API
+        JSONArray locationData = getLocationData(locationName);
+        if (locationData == null || locationData.isEmpty()) {
+            System.out.println("Location data is null or empty");
+            return null;
+        }
+        JSONObject location = (JSONObject) locationData.get(0);
+        double latitude = (double) location.get("latitude");
+        double longitude = (double) location.get("longitude");
+
+        String urlString = "https://api.open-meteo.com/v1/forecast?" +
+                "latitude=" + latitude +
+                "&longitude=" + longitude +
+                "&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FSingapore";
 
         try {
-            // call the api and get the response
-            HttpURLConnection connection = fetchApiResponse(apiURL);
-
-            // check for response status
-            // 200 means connection successful
-            assert connection != null;
-            if (connection.getResponseCode() != 200) {
-                System.out.println("COULD NOT CONNECT to api");
+            HttpURLConnection connection = fetchApiResponse(urlString);
+            if (connection == null || connection.getResponseCode() != 200) {
+                System.out.println("Could not connect to API");
                 return null;
-            } else {
-                StringBuilder hourly = new StringBuilder();
-                Scanner sc = new Scanner(connection.getInputStream());
-
-                while (sc.hasNext()) {
-                    // read and store the resulting json data into our string builder
-                    hourly.append(sc.nextLine());
-                }
-                sc.close();
-                // close the url connection
-                connection.disconnect();
-                JSONParser parser = new JSONParser();
-                JSONObject resultHour = (JSONObject) parser.parse(String.valueOf(hourly));
-
-                // extract the hourly data from the JSON response
-                JSONObject hourlydata = (JSONObject) resultHour.get("hourly");
-
-                // we want to get the current' hours' data
-                // we need to get the index of our current data
-
-                JSONArray time = (JSONArray) hourlydata.get("time");
-                int index = findIndexOfCurrentTime(time);
-
-                JSONArray temperatureData = (JSONArray) hourlydata.get("temperature_2m");
-                // now we just need to get the temperature data of the current hour,
-                // and we pass  in the index of the current hour
-
-                if (hourlydata != null && !hourlydata.isEmpty()) {
-                    return (JSObject) hourlydata.get(0);
-                } else {
-                    // handle the case where the array is empty or null
-                    return null;
-                }
             }
+
+            StringBuilder savedJSON = new StringBuilder();
+            Scanner sc = new Scanner(connection.getInputStream());
+            while (sc.hasNext()) {
+                savedJSON.append(sc.nextLine());
+            }
+            sc.close();
+
+            // close url connection
+            connection.disconnect();
+
+            // parse through the data
+            JSONParser parser = new JSONParser();
+            JSONObject resultHour = (JSONObject) parser.parse(String.valueOf(savedJSON));
+
+            // retrieve hourly data
+            JSONObject hourlyData = (JSONObject) resultHour.get("hourly");
+
+            if (hourlyData == null) {
+                System.out.println("Hourly data is null");
+                return null;
+            }
+
+            // we want to get the current hour's data,
+            // so we need to get the index of our current hour
+            JSONArray time = (JSONArray) hourlyData.get("time");
+            int index = findIndexOfCurrentTime(time);
+
+            // get temperature
+            JSONArray temperatureData = (JSONArray) hourlyData.get("temperature_2m");
+            double temperature = (double) temperatureData.get(index);
+
+            // get weather code
+            JSONArray weathercode = (JSONArray) hourlyData.get("weather_code");
+            String weatherCondition = convertWeatherCode((long) weathercode.get(index));
+
+            // get humidity
+            JSONArray relativeHumidity = (JSONArray) hourlyData.get("relative_humidity_2m");
+            long humidity = (long) relativeHumidity.get(index);
+
+            // get windspeed
+            JSONArray windspeedData = (JSONArray) hourlyData.get("wind_speed_10m");
+            double windspeed = (double) windspeedData.get(index);
+
+            // build the weather json data object that we are going to access in our frontend
+            JSONObject weatherData = new JSONObject();
+            weatherData.put("temperature", temperature);
+            weatherData.put("weather_condition", weatherCondition);
+            weatherData.put("humidity", humidity);
+            weatherData.put("windspeed", windspeed);
+
+            return weatherData;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private static @NotNull String getString(JSONArray locationData) {
-        assert locationData != null;
-        JSONObject location = (JSONObject) locationData.get(0);
-        double latitude = (double) location.get("latitude");
-        double longitude = (double) location.get("longitude");
-
-        // build API request URL  with location coordinates
-        String apiURL = "https://api.open-meteo.com/v1/forecast?" +
-                "latitude=" + latitude +
-                "&longitude=" + longitude +
-                "&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FSingapore ";
-        return apiURL;
-    }
 
     @org.jetbrains.annotations.Nullable
     private static String api_key() {
@@ -111,129 +120,91 @@ public class WeatherApp {
         return null;
     }
 
-
     private static int findIndexOfCurrentTime(JSONArray timeList) {
         String currentTime = getCurrentTime();
 
+        // iterate through the time list and see which one matches our current state
         for (int i = 0; i < timeList.size(); i++) {
             String time = (String) timeList.get(i);
             if (time.equalsIgnoreCase(currentTime)) {
-                // returns the index
+                // return the index
                 return i;
             }
         }
-
         return 0;
     }
 
     public static String getCurrentTime() {
-        LocalDateTime currentTime = LocalDateTime.now();
 
-        //format date to be 2023-09-23T10:15:30  (this is how the api read time)
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
-        // format and print the current date and time
-        return currentTime.format(formatter);
+        // get current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // format date and time to 2023-09-02T00:00 (this is the format the api uses)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH':00'");
+
+        // format and print the current time and date
+        return currentDateTime.format(formatter);
     }
 
-    // get the weather code from the internet and identify the weather condition
-    //  based on WMO weather code interpretation
     private static String convertWeatherCode(long WeatherCode) {
-        String weatherCondidition = "";
-        if (WeatherCode == 0L) { // weatherCode -> 0
-            //clear weather
-            weatherCondidition = "Clear";
-        } else if (WeatherCode > 0L && WeatherCode <= 3L) { // weatherCode -> 1 to 3
-            //cloudy
-            weatherCondidition = "Cloudy";
-        } else if (WeatherCode >= 51L && WeatherCode <= 67L) ||(WeatherCode >= 80L && WeatherCode <= 90L) {
-            // rain
-            weatherCondidition = "Rain";
-        } else(WeatherCode >= 71L && WeatherCode <= 77L) {
-            // snow
-            weatherCondidition = "Snow";
+        String weatherCondition = "";
+        if (WeatherCode == 0L) {
+            weatherCondition = "Clear";
+        } else if (WeatherCode > 0L && WeatherCode <= 3L) {
+            weatherCondition = "Cloudy";
+        } else if ((WeatherCode >= 51L && WeatherCode <= 67L) || (WeatherCode >= 80L && WeatherCode <= 99L)) {
+            weatherCondition = "Rain";
+        } else if (WeatherCode >= 71L && WeatherCode <= 77L) {
+            weatherCondition = "Snow";
         }
-
-        return weatherCondidition;
+        return weatherCondition;
     }
 
-    /* to use weather forecast api we need to give
-    the longitude and latitude data which can be found
-    using their Geolocation API,
-    that's why we will be creating another API call where it will take in and entered location, and returns the
-    latitude and longitude data
-     */
-
-    // retrieves geographic coordinates for given location name
     public static JSONArray getLocationData(String locationName) {
-        // replace any whitespace in location name to + adhere to APIs request format
-        // so when giving city name = "new york", it standards to new+york;
         locationName = locationName.replaceAll(" ", "+");
-
-        // build API url with location parameter
-        String URLString = "https://api.api-ninjas.com/v1/geocoding?city=" + locationName;
+        String URLString = "https://geocoding-api.open-meteo.com/v1/search?name=" +
+                locationName + "&count=10&language=en&format=json";
 
         try {
-            // call the api and get the response
             HttpURLConnection connection = fetchApiResponse(URLString);
-
-            // check response status
-            // 200 means successful connection
-            // please read all the https status code in readme
-            if (connection.getResponseCode() != 200) {
-                System.out.println("Error : Could not connect to API");
+            if (connection == null || connection.getResponseCode() != 200) {
+                System.out.println("Error: Could not connect to API");
                 return null;
             } else {
-                // store the API results
+
                 StringBuilder resultJson = new StringBuilder();
                 Scanner sc = new Scanner(connection.getInputStream());
-
-                // read and store the resulting json data into our string builder
                 while (sc.hasNext()) {
                     resultJson.append(sc.nextLine());
                 }
                 sc.close();
-                //close the url connection
                 connection.disconnect();
 
-                // parse the Json String into a JSON Object
                 JSONParser parser = new JSONParser();
-                JSONArray resultsJsonArray = (JSONArray) parser.parse(String.valueOf(resultJson));
+                JSONObject resultsJsonObj = (JSONObject) parser.parse(String.valueOf(resultJson));
 
-                // get the first object from the array (if needed)
-                if (resultsJsonArray != null && !resultsJsonArray.isEmpty()) {
-                    return resultsJsonArray;
-                } else {
-                    // handle the case where the array is empty or null
-                    return null;
-                }
-                // get the list of location data the API generated from the location name
+                return (JSONArray) resultsJsonObj.get("results");
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // couldn't find the location
         return null;
     }
 
     private static HttpURLConnection fetchApiResponse(String URLString) {
         try {
-            // attempt to create a connection
             URL url = new URL(URLString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            // set request method to get
-            // methods : GET, PUT, DELETE, POST
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("X-API-Key", api_key());
-            connection.addRequestProperty("ACCEPT", "application/json");
-            //connect to our API
+
+            // connect to our api
             connection.connect();
             return connection;
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        // could not make connection
+        // return could not make connection
         return null;
     }
 }
