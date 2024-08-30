@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="added the WeatherCode method that explain the weather code and return the weather condition based on it">
+    <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="changed the condition of weatherData with corrected parameters, added the action listener which then changes the code for it. Thanks Application is fully recognizable and working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherApp.java" afterDir="false" />
@@ -120,7 +120,7 @@
       <workItem from="1723880224483" duration="14117000" />
       <workItem from="1723905519659" duration="10592000" />
       <workItem from="1724048995183" duration="8562000" />
-      <workItem from="1724212738449" duration="39054000" />
+      <workItem from="1724212738449" duration="42502000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -178,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724924422394</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changed the condition of weatherData with corrected parameters, added the action listener which then changes the code for it. Thanks Application is fully recognizable and working">
+      <option name="closed" value="true" />
+      <created>1724944563561</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724944563561</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +226,8 @@
     <MESSAGE value="finally, got the hourly data from the open meteo api call, and extract the fucntion from to getString from the apiUrl, and annotate, which can be the case of new code format" />
     <MESSAGE value="lol, I FKING ADDED THE INDEX OF THE CURRENET DATA AND EXTRAACT THE DATA FROM THE ARRAHY HEll, yeah..." />
     <MESSAGE value="added the WeatherCode method that explain the weather code and return the weather condition based on it" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the WeatherCode method that explain the weather code and return the weather condition based on it" />
+    <MESSAGE value="changed the condition of weatherData with corrected parameters, added the action listener which then changes the code for it. Thanks Application is fully recognizable and working" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the condition of weatherData with corrected parameters, added the action listener which then changes the code for it. Thanks Application is fully recognizable and working" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -39,7 +39,7 @@ public class WeatherAppGUI extends  JFrame {
 
         // adding gui components
         guiComponents();
-        //  darkTheme();
+        darkTheme();
     }
 
     private void guiComponents() {

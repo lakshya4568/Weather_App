@@ -17,6 +17,6 @@ public class AppLauncher {
         // it is important for maintaining  the responsiveness and stability of a swing application's UI
 
         //System.out.println(WeatherApp.getLocationData("New York"));
-        //System.out.println(WeatherApp.getCurrentTime());
+        System.out.println(WeatherApp.getCurrentTime());
     }
 }
