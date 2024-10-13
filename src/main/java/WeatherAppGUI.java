@@ -12,15 +12,11 @@ import java.io.IOException;
 
 // inherit the Jframe class from the swing packages to our gui class
 public class WeatherAppGUI extends  JFrame {
-    private JSONObject weatherData; // this will hold our weatherdata
-    // it's json object type beacuse the method that we are going to call will return json object
-
-
-
-
+    private JSONObject weatherData; // this will hold our weather data
+    // it's json object type because the method that we are going to call will return json object
     // create the constructor of the same class
     public WeatherAppGUI() {
-        super("Weather App");
+        super();
 
         // configure gui to end the program's process once it has been closed
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -60,12 +56,12 @@ public class WeatherAppGUI extends  JFrame {
 
 
         // weather image
-        JLabel weatherConditionImage = new JLabel(loadImage("src/assets/clear.png"));
+        JLabel weatherConditionImage = new JLabel(loadImage("src/assets/earth.jpeg"));
         weatherConditionImage.setBounds(0, 125, 450, 217);
         add(weatherConditionImage);
 
         // temperature text
-        JLabel temperatureText = new JLabel("10 ˚C");
+        JLabel temperatureText = new JLabel("WEATHER APP");
         temperatureText.setBounds(0, 350, 450, 54);
         temperatureText.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // font class can take these values for getting font style (name, Font style -> Bold, italics and Size(int));
@@ -126,8 +122,9 @@ public class WeatherAppGUI extends  JFrame {
 
                 // retrieve the weather data
                 weatherData = WeatherApp.getWeatherData(userInput);
+                // weatherData = WeatherApp.getWeatherData('open-meteo.com');
 
-                // update gui components
+                // update gui components -> components here
 
                 // updating weather image
                 String weatherCondition = (String) weatherData.get("weather_condition");
@@ -139,7 +136,7 @@ public class WeatherAppGUI extends  JFrame {
                     case "Cloudy" -> weatherConditionImage.setIcon(loadImage("src/assets/cloudy.png"));
                     case "Rain" -> weatherConditionImage.setIcon(loadImage("src/assets/rain.png"));
                     case "Snow" -> weatherConditionImage.setIcon(loadImage("src/assets/snow.png"));
-                    default -> weatherConditionImage.setIcon(loadImage("src/assets/clear.png"));
+                    default -> weatherConditionImage.setIcon(loadImage("src/assets/earth.jpeg"));
                 }
 
                 // update temperature text
@@ -166,6 +163,8 @@ public class WeatherAppGUI extends  JFrame {
         //  create the Icon for icon
         try {
             BufferedImage image = ImageIO.read(new File(resourcePath));
+
+            // returns an image icon so that our component can render it.
             return new ImageIcon(image);
         } catch (IOException e) {
             e.printStackTrace();

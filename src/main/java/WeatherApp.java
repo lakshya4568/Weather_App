@@ -20,6 +20,8 @@ public class WeatherApp {
             System.out.println("Location data is null or empty");
             return null;
         }
+
+        // extract the longitude and latitude from the data
         JSONObject location = (JSONObject) locationData.get(0);
         double latitude = (double) location.get("latitude");
         double longitude = (double) location.get("longitude");
@@ -29,16 +31,23 @@ public class WeatherApp {
                 "&longitude=" + longitude +
                 "&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FSingapore";
 
+
         try {
+            // call the api and get the response
             HttpURLConnection connection = fetchApiResponse(urlString);
+
+            // check for response status
+            // 200 - means that the connection was a success
             if (connection == null || connection.getResponseCode() != 200) {
                 System.out.println("Could not connect to API");
                 return null;
             }
 
+            // store the resulting json data
             StringBuilder savedJSON = new StringBuilder();
             Scanner sc = new Scanner(connection.getInputStream());
             while (sc.hasNext()) {
+                // read and store in the next string builder
                 savedJSON.append(sc.nextLine());
             }
             sc.close();
@@ -53,6 +62,7 @@ public class WeatherApp {
             // retrieve hourly data
             JSONObject hourlyData = (JSONObject) resultHour.get("hourly");
 
+            // we will extract the current hour data, so we need to get the index of the current hour
             if (hourlyData == null) {
                 System.out.println("Hourly data is null");
                 return null;
@@ -158,31 +168,39 @@ public class WeatherApp {
         return weatherCondition;
     }
 
+    // retrieves the geographic coordinates for a given location
     public static JSONArray getLocationData(String locationName) {
         locationName = locationName.replaceAll(" ", "+");
+
+        // build api url with location parameter
         String URLString = "https://geocoding-api.open-meteo.com/v1/search?name=" +
                 locationName + "&count=10&language=en&format=json";
 
         try {
+            // call an api to fetch response and retrieve it.
             HttpURLConnection connection = fetchApiResponse(URLString);
             if (connection == null || connection.getResponseCode() != 200) {
                 System.out.println("Error: Could not connect to API");
                 return null;
             } else {
 
+                // store the api result.
                 StringBuilder resultJson = new StringBuilder();
                 Scanner sc = new Scanner(connection.getInputStream());
+
+                // read and store the resulting string data into our string builder
                 while (sc.hasNext()) {
                     resultJson.append(sc.nextLine());
                 }
-                sc.close();
-                connection.disconnect();
+                sc.close(); // scanner closed
+                connection.disconnect(); // close the connection after it works is over
 
+                // parse the json string into a json object
                 JSONParser parser = new JSONParser();
                 JSONObject resultsJsonObj = (JSONObject) parser.parse(String.valueOf(resultJson));
 
+                // get the list of location data (coordinates) the api generated from the location name
                 return (JSONArray) resultsJsonObj.get("results");
-
             }
         } catch (Exception e) {
             e.printStackTrace();

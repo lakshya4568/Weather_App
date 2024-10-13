@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bee9d1aa-cf5c-4601-8577-3ffd7325bfc8" name="Changes" comment="changed the condition of weatherData with corrected parameters, added the action listener which then changes the code for it. Thanks Application is fully recognizable and working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherAppGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherAppGUI.java" afterDir="false" />
     </list>
@@ -78,7 +77,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.13652869&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.31367522&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -121,6 +120,8 @@
       <workItem from="1723905519659" duration="10592000" />
       <workItem from="1724048995183" duration="8562000" />
       <workItem from="1724212738449" duration="42502000" />
+      <workItem from="1728016577667" duration="4470000" />
+      <workItem from="1728535346295" duration="765000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
