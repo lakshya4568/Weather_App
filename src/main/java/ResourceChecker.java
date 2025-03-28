@@ -23,7 +23,8 @@ public class ResourceChecker {
         // Check if essential icon files exist
         String[] requiredAssets = {
                 "earth.jpeg", "clear.png", "cloudy.png", "rain.png",
-                "snow.png", "humidity.png", "windspeed.png", "search.png"
+                "snow.png", "humidity.png", "windspeed.png", "search.png",
+                "light_mode.png", "dark_mode.png"
         };
 
         for (String asset : requiredAssets) {
