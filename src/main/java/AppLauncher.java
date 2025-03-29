@@ -10,13 +10,17 @@ public class AppLauncher {
             it's useful for swing gui's like ours because it makes updates
             to the GUI more thread safe
          */
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+        SwingUtilities.invokeLater(() -> {
+            try {
                 //  display our weather app gui
-                 new WeatherAppGUI().setVisible(true);
+                WeatherAppGUI app = new WeatherAppGUI();
+                app.setVisible(true);
+                System.out.println("Weather App started successfully");
+            } catch (Exception e) {
+                System.err.println("Error starting the Weather App: " + e.getMessage());
+                e.printStackTrace();
             }
-        } ); // this whole block of code, implements our gui to work on Event Dispatch Thread
+        }); // this whole block of code, implements our gui to work on Event Dispatch Thread
         // it is important for maintaining  the responsiveness and stability of a swing application's UI
     }
 }

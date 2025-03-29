@@ -6,8 +6,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +16,7 @@ public class WeatherAppGUI extends JFrame {
     private boolean isDarkTheme = true;
 
     // UI Components
-    private JPanel mainPanel;
+    private final JPanel mainPanel;
     private JTextField searchTextField;
     private JButton searchButton;
     private JButton themeToggleButton;
@@ -33,13 +31,13 @@ public class WeatherAppGUI extends JFrame {
     private JPanel detailsPanel;
 
     // Colors
-    private Color darkBgColor = new Color(25, 30, 35);
-    private Color lightBgColor = new Color(240, 245, 250);
-    private Color darkAccentColor = new Color(45, 50, 60);
-    private Color lightAccentColor = new Color(220, 225, 235);
-    private Color darkTextColor = new Color(230, 230, 230);
-    private Color lightTextColor = new Color(40, 40, 40);
-    private Color primaryColor = new Color(66, 133, 244);
+    private final Color darkBgColor = new Color(25, 30, 35);
+    private final Color lightBgColor = new Color(240, 245, 250);
+    private final Color darkAccentColor = new Color(45, 50, 60);
+    private final Color lightAccentColor = new Color(220, 225, 235);
+    private final Color darkTextColor = new Color(230, 230, 230);
+    private final Color lightTextColor = new Color(40, 40, 40);
+    private final Color primaryColor = new Color(66, 133, 244);
     
     public WeatherAppGUI() {
         super("Weather App");
@@ -48,12 +46,12 @@ public class WeatherAppGUI extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Apply initial theme
-        applyTheme(isDarkTheme);
-
-        // Create main panel
+        // Create main panel first
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(0, 0));
+        
+        // Then apply theme
+        applyTheme(isDarkTheme);
 
         // Initialize and add components
         initComponents();
@@ -213,20 +211,10 @@ public class WeatherAppGUI extends JFrame {
     }
 
     private void addSearchFunctionality() {
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchWeather();
-            }
-        });
+        searchButton.addActionListener(e -> searchWeather());
 
         // Also allow searching by pressing Enter
-        searchTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchWeather();
-            }
-        });
+        searchTextField.addActionListener(e -> searchWeather());
     }
 
     private void searchWeather() {
@@ -248,7 +236,7 @@ public class WeatherAppGUI extends JFrame {
         searchTextField.setEnabled(false);
 
         // Retrieve weather data in a separate thread to keep UI responsive
-        SwingWorker<JSONObject, Void> worker = new SwingWorker<JSONObject, Void>() {
+        SwingWorker<JSONObject, Void> worker = new SwingWorker<>() {
             @Override
             protected JSONObject doInBackground() {
                 return WeatherApp.getWeatherData(userInput);
@@ -328,14 +316,11 @@ public class WeatherAppGUI extends JFrame {
     }
 
     private void addThemeToggleFunctionality() {
-        themeToggleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isDarkTheme = !isDarkTheme;
-                applyTheme(isDarkTheme);
-                updateThemeButton();
-                updateUIComponents();
-            }
+        themeToggleButton.addActionListener(e -> {
+            isDarkTheme = !isDarkTheme;
+            applyTheme(isDarkTheme);
+            updateThemeButton();
+            updateUIComponents();
         });
     }
 
