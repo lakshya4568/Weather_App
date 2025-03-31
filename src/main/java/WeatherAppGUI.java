@@ -49,12 +49,12 @@ public class WeatherAppGUI extends JFrame {
         // Create main panel first
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(0, 0));
-        
+
+        initComponents();
+
         // Then apply theme
         applyTheme(isDarkTheme);
 
-        // Initialize and add components
-        initComponents();
 
         // Add the main panel to the frame
         add(mainPanel);
